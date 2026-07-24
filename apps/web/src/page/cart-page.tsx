@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@react-workshop/ui/button";
 import { Container } from "@/components/container";
+import { TrashIcon } from "@/components/icons";
 import { PageBanner } from "@/components/page-banner";
 import { EmptyState } from "@/components/page-state";
 import { QuantityStepper } from "@/components/quantity-stepper";
@@ -114,13 +115,5 @@ export function CartPage() {
         )}
       </Container>
     </>
-  );
-}
-
-function TrashIcon() {
-  return (
-    <svg className="size-6" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M9 3h6a1 1 0 0 1 1 1v1h4v2H4V5h4V4a1 1 0 0 1 1-1Zm-3 6h12l-1 12a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1L6 9Z" />
-    </svg>
   );
 }

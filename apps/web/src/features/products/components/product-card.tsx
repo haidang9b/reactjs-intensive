@@ -4,12 +4,7 @@ import { useCompare } from "@/features/compare/hooks/use-compare";
 import { useWishlist } from "@/features/wishlist/hooks/use-wishlist";
 import type { Product } from "@/types/product";
 import { formatCurrency } from "@/utils/format";
-
-const badgeStyles: Record<string, string> = {
-  New: "bg-[#2ec1ac]",
-  Sale: "bg-[#e97171]",
-  Hot: "bg-[#e97171]",
-};
+import { ProductBadge } from "./product-badge";
 
 export function ProductCard({ product }: { product: Product }) {
   const { addItem } = useCart();
@@ -27,15 +22,11 @@ export function ProductCard({ product }: { product: Product }) {
 
   return (
     <article className="group relative flex flex-col overflow-hidden bg-[#f4f5f7]">
-      {product.badge ? (
-        <span
-          className={`absolute right-6 top-6 z-10 flex size-12 items-center justify-center rounded-full text-sm font-medium text-white ${
-            badgeStyles[product.badge] ?? "bg-[#2ec1ac]"
-          }`}
-        >
-          {product.badge === "Sale" && discount ? `-${discount}%` : product.badge}
-        </span>
-      ) : null}
+      <ProductBadge
+        className="absolute right-6 top-6 z-10 size-12 text-sm"
+        discount={discount}
+        label={product.badge}
+      />
 
       <Link className="block overflow-hidden" to={`/products/${product.slug}`}>
         <img

@@ -2,7 +2,9 @@ import { useMemo, useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { Container } from "@/components/container";
 import { PageBanner } from "@/components/page-banner";
+import { SearchIcon } from "@/components/icons";
 import { EmptyState, ErrorState, LoadingState } from "@/components/page-state";
+import { Pagination } from "@/components/pagination";
 import { usePosts } from "@/features/blog/hooks/use-posts";
 import { useDebounce } from "@/hooks/use-debounce";
 import type { BlogPost } from "@/types/post";
@@ -79,35 +81,11 @@ export function BlogPage() {
             ))}
           </div>
 
-          {totalPages > 1 ? (
-            <div className="mt-14 flex items-center justify-center gap-3">
-              {Array.from({ length: totalPages }, (_, index) => index + 1).map(
-                (value) => (
-                  <button
-                    aria-current={value === currentPage ? "page" : undefined}
-                    className={`flex size-12 items-center justify-center rounded-lg text-base font-medium transition-colors ${
-                      value === currentPage
-                        ? "bg-[#b88e2f] text-white"
-                        : "bg-[#f9f1e7] text-[#333333] hover:bg-[#efe7d5]"
-                    }`}
-                    key={value}
-                    onClick={() => setPage(value)}
-                    type="button"
-                  >
-                    {value}
-                  </button>
-                ),
-              )}
-              <button
-                className="flex h-12 items-center justify-center rounded-lg bg-[#f9f1e7] px-6 text-base font-medium text-[#333333] transition-colors hover:bg-[#efe7d5] disabled:opacity-40"
-                disabled={currentPage >= totalPages}
-                onClick={() => setPage(Math.min(totalPages, currentPage + 1))}
-                type="button"
-              >
-                Next
-              </button>
-            </div>
-          ) : null}
+          <Pagination
+            current={currentPage}
+            onChange={setPage}
+            totalPages={totalPages}
+          />
         </div>
 
         {/* Sidebar */}
@@ -124,7 +102,7 @@ export function BlogPage() {
               type="search"
               value={search}
             />
-            <SearchIcon />
+            <SearchIcon className="pointer-events-none absolute right-4 top-1/2 size-5 -translate-y-1/2 text-[#333333]" />
           </div>
 
           <div>
@@ -223,22 +201,6 @@ function Meta({ icon, text }: { icon: ReactNode; text: string }) {
       {icon}
       {text}
     </span>
-  );
-}
-
-function SearchIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      className="pointer-events-none absolute right-4 top-1/2 size-5 -translate-y-1/2 text-[#333333]"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={1.8}
-      viewBox="0 0 24 24"
-    >
-      <circle cx="11" cy="11" r="7" />
-      <path d="m20 20-3.5-3.5" strokeLinecap="round" />
-    </svg>
   );
 }
 

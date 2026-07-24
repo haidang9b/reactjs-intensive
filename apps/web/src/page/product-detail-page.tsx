@@ -2,9 +2,12 @@ import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button } from "@react-workshop/ui/button";
 import { Container } from "@/components/container";
+import { ChevronRightIcon } from "@/components/icons";
 import { EmptyState, ErrorState, LoadingState } from "@/components/page-state";
 import { QuantityStepper } from "@/components/quantity-stepper";
 import { Rating } from "@/components/rating";
+import { ProductBadge } from "@/features/products/components/product-badge";
+import { ProductSummaryCard } from "@/features/products/components/product-summary-card";
 import { useCart } from "@/features/cart/hooks/use-cart";
 import { useCompare } from "@/features/compare/hooks/use-compare";
 import { useWishlist } from "@/features/wishlist/hooks/use-wishlist";
@@ -108,11 +111,11 @@ function ProductDetailView({ product }: { product: ProductDetail }) {
           <Link className="text-[#9f9f9f]" to="/">
             Home
           </Link>
-          <Chevron />
+          <ChevronRightIcon className="size-4 text-[#9f9f9f]" />
           <Link className="text-[#9f9f9f]" to="/shop">
             Shop
           </Link>
-          <Chevron />
+          <ChevronRightIcon className="size-4 text-[#9f9f9f]" />
           <span className="h-6 w-px bg-[#9f9f9f]" />
           <span className="text-[#333333]">{product.name}</span>
         </Container>
@@ -328,31 +331,17 @@ function ProductDetailView({ product }: { product: ProductDetail }) {
             </h2>
             <div className="grid grid-cols-2 gap-6 lg:grid-cols-4">
               {product.relatedProducts.map((related) => (
-                <Link
-                  className="group flex flex-col bg-[#f4f5f7]"
-                  key={related.id}
-                  to={`/products/${related.slug}`}
-                >
-                  <div className="relative overflow-hidden">
-                    {related.badge ? (
-                      <span
-                        className={`absolute right-4 top-4 z-10 flex size-11 items-center justify-center rounded-full text-xs font-medium text-white ${
-                          related.badge === "New" ? "bg-[#2ec1ac]" : "bg-[#e97171]"
-                        }`}
-                      >
-                        {related.badge}
-                      </span>
-                    ) : null}
-                    <img
-                      alt={related.name}
-                      className="aspect-square w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      src={related.thumbnail}
+                <ProductSummaryCard
+                  badge={
+                    <ProductBadge
+                      className="absolute right-4 top-4 z-10 size-11 text-xs"
+                      label={related.badge}
                     />
-                  </div>
-                  <div className="grid gap-1 p-4">
-                    <h3 className="text-lg font-semibold text-[#3a3a3a]">
-                      {related.name}
-                    </h3>
+                  }
+                  image={related.thumbnail}
+                  key={related.id}
+                  name={related.name}
+                  price={
                     <div className="flex items-center gap-3">
                       <span className="font-medium text-[#333333]">
                         {related.priceText}
@@ -363,8 +352,9 @@ function ProductDetailView({ product }: { product: ProductDetail }) {
                         </span>
                       ) : null}
                     </div>
-                  </div>
-                </Link>
+                  }
+                  to={`/products/${related.slug}`}
+                />
               ))}
             </div>
             <div className="mt-10 text-center">
@@ -385,14 +375,6 @@ function MetaRow({ label, value }: { label: string; value: string }) {
       <dt className="w-24">{label}</dt>
       <dd>: {value}</dd>
     </div>
-  );
-}
-
-function Chevron() {
-  return (
-    <svg className="size-4 text-[#9f9f9f]" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-      <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
   );
 }
 

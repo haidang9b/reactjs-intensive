@@ -3,7 +3,7 @@ import type { ComponentProps } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@react-workshop/ui/button";
-import { Field, FieldError, Input, Label } from "@react-workshop/ui/input";
+import { Field, FieldError, Input, Label, Select } from "@react-workshop/ui/input";
 import { Container } from "@/components/container";
 import { PageBanner } from "@/components/page-banner";
 import { EmptyState } from "@/components/page-state";
@@ -21,9 +21,6 @@ const provinces = [
   "Southern Province",
   "Northern Province",
 ];
-
-const selectClass =
-  "h-12 w-full rounded-[10px] border border-[#9f9f9f] bg-white px-4 text-base text-[#333333] focus-visible:border-[#b88e2f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b88e2f]/40";
 
 export function CheckoutPage() {
   const navigate = useNavigate();
@@ -128,13 +125,13 @@ export function CheckoutPage() {
 
             <Field>
               <Label htmlFor="country">Country / Region</Label>
-              <select className={selectClass} id="country" {...form.register("country")}>
+              <Select id="country" {...form.register("country")}>
                 {countries.map((country) => (
                   <option key={country} value={country}>
                     {country}
                   </option>
                 ))}
-              </select>
+              </Select>
             </Field>
 
             <Field>
@@ -159,13 +156,13 @@ export function CheckoutPage() {
 
             <Field>
               <Label htmlFor="province">Province</Label>
-              <select className={selectClass} id="province" {...form.register("province")}>
+              <Select id="province" {...form.register("province")}>
                 {provinces.map((province) => (
                   <option key={province} value={province}>
                     {province}
                   </option>
                 ))}
-              </select>
+              </Select>
             </Field>
 
             <Field>

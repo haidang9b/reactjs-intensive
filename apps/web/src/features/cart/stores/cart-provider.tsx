@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useReducer, type ReactNode } from "react";
+import { useMemo, type ReactNode } from "react";
+import { usePersistedReducer } from "@/hooks/use-persisted-reducer";
 import type { CartItem, CartTotals } from "@/types/cart";
 import {
   CartContext,
@@ -48,24 +49,8 @@ function cartReducer(state: CartItem[], action: CartAction): CartItem[] {
   }
 }
 
-function readInitialCart(): CartItem[] {
-  if (typeof window === "undefined") {
-    return [];
-  }
-  try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
-    return raw ? (JSON.parse(raw) as CartItem[]) : [];
-  } catch {
-    return [];
-  }
-}
-
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [items, dispatch] = useReducer(cartReducer, undefined, readInitialCart);
-
-  useEffect(() => {
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
-  }, [items]);
+  const [items, dispatch] = usePersistedReducer(cartReducer, STORAGE_KEY, []);
 
   const value = useMemo<CartContextValue>(() => {
     const totals: CartTotals = items.reduce<CartTotals>(
@@ -87,7 +72,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       removeItem: (productId) => dispatch({ type: "remove", productId }),
       clearCart: () => dispatch({ type: "clear" }),
     };
-  }, [items]);
+  }, [items, dispatch]);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }

@@ -1,6 +1,14 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { Container } from "@/components/container";
+import {
+  AccountIcon,
+  CartIcon,
+  CloseIcon,
+  HeartIcon,
+  MenuIcon,
+  SearchIcon,
+} from "@/components/icons";
 import { CartDrawer } from "@/features/cart/components/cart-drawer";
 import { useCart } from "@/features/cart/hooks/use-cart";
 import { useWishlist } from "@/features/wishlist/hooks/use-wishlist";
@@ -131,77 +139,10 @@ export function Header() {
   );
 }
 
-function MenuIcon() {
-  return (
-    <svg aria-hidden="true" className="size-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
-      <path d="M4 6h16M4 12h16M4 18h16" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function CloseIcon() {
-  return (
-    <svg aria-hidden="true" className="size-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
-      <path d="M6 6l12 12M18 6 6 18" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function Badge({ children }: { children: React.ReactNode }) {
+function Badge({ children }: { children: ReactNode }) {
   return (
     <span className="absolute -right-2 -top-2 flex size-5 items-center justify-center rounded-full bg-[#b88e2f] text-xs font-semibold text-white">
       {children}
     </span>
-  );
-}
-
-function AccountIcon() {
-  return (
-    <svg aria-hidden="true" className="size-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
-      <circle cx="12" cy="8" r="4" />
-      <path d="M4 21a8 8 0 0 1 16 0" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function SearchIcon() {
-  return (
-    <svg aria-hidden="true" className="size-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
-      <circle cx="11" cy="11" r="7" />
-      <path d="m20 20-3.5-3.5" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function HeartIcon() {
-  return (
-    <svg aria-hidden="true" className="size-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
-      <path
-        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function CartIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      className="size-6"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={1.8}
-      viewBox="0 0 24 24"
-    >
-      <path
-        d="M2.5 3h2l2.2 12.2a1.5 1.5 0 0 0 1.5 1.3h8.6a1.5 1.5 0 0 0 1.5-1.2L21 7H6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle cx="9.5" cy="20" r="1.4" />
-      <circle cx="17.5" cy="20" r="1.4" />
-    </svg>
   );
 }

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { CloseIcon } from "@/components/icons";
 import { useCart } from "@/features/cart/hooks/use-cart";
 import { formatCurrency } from "@/utils/format";
 
@@ -53,7 +54,7 @@ export function CartDrawer({
             onClick={onClose}
             type="button"
           >
-            <CloseIcon />
+            <CloseIcon className="size-5" />
           </button>
         </div>
 
@@ -137,14 +138,6 @@ function DrawerLink({
     >
       {children}
     </Link>
-  );
-}
-
-function CloseIcon() {
-  return (
-    <svg className="size-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-      <path d="M6 6l12 12M18 6 6 18" strokeLinecap="round" />
-    </svg>
   );
 }
 

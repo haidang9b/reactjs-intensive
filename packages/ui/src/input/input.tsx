@@ -2,6 +2,7 @@ import type {
   InputHTMLAttributes,
   LabelHTMLAttributes,
   ReactNode,
+  SelectHTMLAttributes,
   TextareaHTMLAttributes,
 } from "react";
 import { cn } from "../utils";
@@ -24,6 +25,20 @@ export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
 export function Input({ className, isInvalid = false, ...props }: InputProps) {
   return (
     <input
+      aria-invalid={isInvalid || undefined}
+      className={cn(fieldBase, "h-12 px-4", fieldTone(isInvalid), className)}
+      {...props}
+    />
+  );
+}
+
+export type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
+  isInvalid?: boolean;
+};
+
+export function Select({ className, isInvalid = false, ...props }: SelectProps) {
+  return (
+    <select
       aria-invalid={isInvalid || undefined}
       className={cn(fieldBase, "h-12 px-4", fieldTone(isInvalid), className)}
       {...props}

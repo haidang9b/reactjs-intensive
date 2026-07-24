@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useReducer, type ReactNode } from "react";
+import { useMemo, type ReactNode } from "react";
+import { usePersistedReducer } from "@/hooks/use-persisted-reducer";
 import {
   CompareContext,
   MAX_COMPARE,
@@ -33,24 +34,8 @@ function compareReducer(
   }
 }
 
-function readInitial(): CompareItem[] {
-  if (typeof window === "undefined") {
-    return [];
-  }
-  try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
-    return raw ? (JSON.parse(raw) as CompareItem[]) : [];
-  } catch {
-    return [];
-  }
-}
-
 export function CompareProvider({ children }: { children: ReactNode }) {
-  const [items, dispatch] = useReducer(compareReducer, undefined, readInitial);
-
-  useEffect(() => {
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
-  }, [items]);
+  const [items, dispatch] = usePersistedReducer(compareReducer, STORAGE_KEY, []);
 
   const value = useMemo<CompareContextValue>(
     () => ({
@@ -59,7 +44,7 @@ export function CompareProvider({ children }: { children: ReactNode }) {
       remove: (id) => dispatch({ type: "remove", id }),
       clear: () => dispatch({ type: "clear" }),
     }),
-    [items],
+    [items, dispatch],
   );
 
   return (

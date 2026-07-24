@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useReducer, type ReactNode } from "react";
+import { useMemo, type ReactNode } from "react";
+import { usePersistedReducer } from "@/hooks/use-persisted-reducer";
 import {
   WishlistContext,
   type WishlistContextValue,
@@ -30,24 +31,8 @@ function wishlistReducer(
   }
 }
 
-function readInitial(): WishlistItem[] {
-  if (typeof window === "undefined") {
-    return [];
-  }
-  try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
-    return raw ? (JSON.parse(raw) as WishlistItem[]) : [];
-  } catch {
-    return [];
-  }
-}
-
 export function WishlistProvider({ children }: { children: ReactNode }) {
-  const [items, dispatch] = useReducer(wishlistReducer, undefined, readInitial);
-
-  useEffect(() => {
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
-  }, [items]);
+  const [items, dispatch] = usePersistedReducer(wishlistReducer, STORAGE_KEY, []);
 
   const value = useMemo<WishlistContextValue>(
     () => ({
@@ -57,7 +42,7 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
       has: (id) => items.some((item) => item.id === id),
       clear: () => dispatch({ type: "clear" }),
     }),
-    [items],
+    [items, dispatch],
   );
 
   return (
