@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Container } from "@/components/container";
 import { FooterNewsletter } from "@/components/footer-newsletter";
+import { asset } from "@/utils/asset";
 
 export function Footer() {
   return (
@@ -8,7 +9,12 @@ export function Footer() {
       <Container className="grid gap-10 pb-10 md:grid-cols-[2fr_1fr_1fr_1.4fr]">
         <div className="grid content-start gap-6">
           <span className="flex items-center gap-2 text-2xl font-bold text-[#333333]">
-            <img alt="" aria-hidden="true" className="size-7" src="/images/logo.svg" />
+            <img
+              alt=""
+              aria-hidden="true"
+              className="size-7"
+              src={asset("/images/logo.svg")}
+            />
             Furniro
           </span>
           <p className="max-w-xs text-sm text-[#9f9f9f]">

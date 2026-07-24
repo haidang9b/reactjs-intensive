@@ -4,6 +4,9 @@ import { resolve } from "node:path";
 import { defineConfig } from "vite";
 
 export default defineConfig({
+  // For GitHub Pages project sites the app is served from "/<repo>/".
+  // The deploy workflow sets PUBLIC_BASE_PATH; locally it stays "/".
+  base: process.env.PUBLIC_BASE_PATH || "/",
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: [

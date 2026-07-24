@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@react-workshop/ui/button";
 import { Container } from "@/components/container";
 import { PageBanner } from "@/components/page-banner";
+import { asset } from "@/utils/asset";
 
 const stats = [
   { value: "12k+", label: "Happy customers" },
@@ -35,7 +36,7 @@ export function AboutPage() {
             <img
               alt="Furniro living room"
               className="h-full w-full object-cover"
-              src="/images/home/home-07.jpg"
+              src={asset("/images/home/home-07.jpg")}
             />
           </div>
           <div className="grid content-start gap-5">

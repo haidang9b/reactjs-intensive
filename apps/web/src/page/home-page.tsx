@@ -4,6 +4,7 @@ import { Container } from "@/components/container";
 import { EmptyState, ErrorState, LoadingState } from "@/components/page-state";
 import { ProductGrid } from "@/features/products/components/product-grid";
 import { useProducts } from "@/features/products/hooks/use-products";
+import { asset } from "@/utils/asset";
 
 const ranges = [
   { label: "Dining", image: "/images/home/home-12.png" },
@@ -69,7 +70,7 @@ function HeroSection({ onShop }: { onShop: () => void }) {
         <img
           alt="Featured living room"
           className="h-full w-full object-cover"
-          src="/images/home/home-01.png"
+          src={asset("/images/home/home-01.png")}
         />
       </div>
       <Container className="relative md:absolute md:inset-x-0 md:top-1/2 md:-translate-y-1/2">
@@ -114,7 +115,7 @@ function BrowseTheRange() {
                 <img
                   alt={range.label}
                   className="aspect-[3/4] w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  src={range.image}
+                  src={asset(range.image)}
                 />
               </div>
               <span className="text-xl font-semibold text-[#333333]">
@@ -149,7 +150,7 @@ function RoomsInspiration({ onExplore }: { onExplore: () => void }) {
             <img
               alt="Inner peace bedroom"
               className="h-[480px] w-full object-cover"
-              src="/images/home/home-08.png"
+              src={asset("/images/home/home-08.png")}
             />
             <div className="absolute bottom-6 left-6 bg-white/85 px-8 py-6 backdrop-blur-sm">
               <p className="text-sm text-[#616161]">
@@ -161,7 +162,7 @@ function RoomsInspiration({ onExplore }: { onExplore: () => void }) {
           <img
             alt="Room inspiration"
             className="hidden h-[480px] w-[240px] object-cover sm:block"
-            src="/images/home/home-05.png"
+            src={asset("/images/home/home-05.png")}
           />
         </div>
       </Container>
@@ -190,7 +191,7 @@ function FuniroGallery() {
               alt="Furniro community setup"
               className="h-full w-full object-cover"
               loading="lazy"
-              src={src}
+              src={asset(src)}
             />
           </div>
         ))}

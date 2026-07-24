@@ -4,6 +4,7 @@ import { Container } from "@/components/container";
 import { CartDrawer } from "@/features/cart/components/cart-drawer";
 import { useCart } from "@/features/cart/hooks/use-cart";
 import { useWishlist } from "@/features/wishlist/hooks/use-wishlist";
+import { asset } from "@/utils/asset";
 
 const navItems = [
   { to: "/", label: "Home", end: true },
@@ -24,7 +25,12 @@ export function Header() {
     <header className="sticky top-0 z-40 border-b border-[#f0f0f0] bg-white">
       <Container className="flex h-20 items-center justify-between">
         <Link className="flex items-center gap-2" to="/">
-          <img alt="" aria-hidden="true" className="size-8" src="/images/logo.svg" />
+          <img
+            alt=""
+            aria-hidden="true"
+            className="size-8"
+            src={asset("/images/logo.svg")}
+          />
           <span className="text-2xl font-bold text-[#333333]">Furniro</span>
         </Link>
 

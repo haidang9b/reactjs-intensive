@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { asset } from "@/utils/asset";
 import { Container } from "./container";
 
 export type Crumb = { label: string; to?: string };
@@ -18,12 +19,17 @@ export function PageBanner({
         alt=""
         aria-hidden="true"
         className="absolute inset-0 h-full w-full object-cover object-center"
-        src={image}
+        src={asset(image)}
       />
       <div className="absolute inset-0 bg-white/70" />
 
       <Container className="relative flex flex-col items-center gap-2 text-center">
-        <img alt="" aria-hidden="true" className="mb-1 size-12" src="/images/logo.svg" />
+        <img
+          alt=""
+          aria-hidden="true"
+          className="mb-1 size-12"
+          src={asset("/images/logo.svg")}
+        />
         <h1 className="text-4xl font-semibold text-[#333333]">{title}</h1>
         <nav className="flex items-center gap-2 text-base">
           {crumbs.map((crumb, index) => (

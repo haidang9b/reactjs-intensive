@@ -41,11 +41,12 @@ const NotFoundPage = lazy(() =>
   import("@/page/not-found-page").then((m) => ({ default: m.NotFoundPage })),
 );
 
-export const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <RootLayout />,
-    children: [
+export const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <RootLayout />,
+      children: [
       { index: true, element: <HomePage /> },
       { path: "shop", element: <ShopPage /> },
       { path: "products/:slug", element: <ProductDetailPage /> },
@@ -58,6 +59,8 @@ export const router = createBrowserRouter([
       { path: "contact", element: <ContactPage /> },
       { path: "about", element: <AboutPage /> },
       { path: "*", element: <NotFoundPage /> },
-    ],
-  },
-]);
+      ],
+    },
+  ],
+  { basename: import.meta.env.BASE_URL.replace(/\/$/, "") || "/" },
+);
