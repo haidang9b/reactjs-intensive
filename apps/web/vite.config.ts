@@ -8,6 +8,10 @@ export default defineConfig({
   resolve: {
     alias: [
       {
+        find: /^@\//,
+        replacement: `${resolve(__dirname, "src")}/`
+      },
+      {
         find: "@react-workshop/ui/styles.css",
         replacement: resolve(__dirname, "../../packages/ui/src/styles.css")
       },

@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "@react-workshop/eslint-config": "workspace:*",
+    "@react-workshop/tsconfig": "workspace:*",
     "@testing-library/jest-dom": "catalog:",
     "@testing-library/react": "catalog:",
     "@testing-library/user-event": "catalog:",
@@ -29,6 +30,9 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "esbuild"
-    ]
+    ],
+    "overrides": {
+      "@joshwooding/vite-plugin-react-docgen-typescript>glob": "^13.0.6"
+    }
   }
 }

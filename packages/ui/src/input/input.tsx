@@ -1,5 +1,21 @@
-import type { InputHTMLAttributes, LabelHTMLAttributes, ReactNode } from "react";
+import type {
+  InputHTMLAttributes,
+  LabelHTMLAttributes,
+  ReactNode,
+  TextareaHTMLAttributes,
+} from "react";
 import { cn } from "../utils";
+
+const fieldBase = cn(
+  "w-full rounded-[10px] border bg-white text-base text-[#333333] transition-colors",
+  "placeholder:text-[#9f9f9f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-0",
+);
+
+function fieldTone(isInvalid: boolean) {
+  return isInvalid
+    ? "border-red-400 focus-visible:border-red-400 focus-visible:ring-red-400/40"
+    : "border-[#9f9f9f] focus-visible:border-[#b88e2f] focus-visible:ring-[#b88e2f]/40";
+}
 
 export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   isInvalid?: boolean;
@@ -8,15 +24,26 @@ export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
 export function Input({ className, isInvalid = false, ...props }: InputProps) {
   return (
     <input
-      className={cn(
-        "h-10 w-full rounded-md border bg-white px-3 text-sm text-zinc-950 shadow-sm transition-colors",
-        "placeholder:text-zinc-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
-        isInvalid
-          ? "border-red-400 focus-visible:ring-red-500"
-          : "border-zinc-300 focus-visible:border-zinc-500 focus-visible:ring-zinc-500",
-        className
-      )}
       aria-invalid={isInvalid || undefined}
+      className={cn(fieldBase, "h-12 px-4", fieldTone(isInvalid), className)}
+      {...props}
+    />
+  );
+}
+
+export type TextareaProps = TextareaHTMLAttributes<HTMLTextAreaElement> & {
+  isInvalid?: boolean;
+};
+
+export function Textarea({
+  className,
+  isInvalid = false,
+  ...props
+}: TextareaProps) {
+  return (
+    <textarea
+      aria-invalid={isInvalid || undefined}
+      className={cn(fieldBase, "min-h-32 px-4 py-3", fieldTone(isInvalid), className)}
       {...props}
     />
   );
@@ -25,7 +52,10 @@ export function Input({ className, isInvalid = false, ...props }: InputProps) {
 export function Label({ className, ...props }: LabelHTMLAttributes<HTMLLabelElement>) {
   return (
     <label
-      className={cn("text-sm font-medium leading-none text-zinc-900", className)}
+      className={cn(
+        "text-base font-medium leading-none text-[#333333]",
+        className,
+      )}
       {...props}
     />
   );
@@ -41,7 +71,7 @@ export function FieldError({ children }: { children?: ReactNode }) {
 
 export function Field({
   children,
-  className
+  className,
 }: {
   children: ReactNode;
   className?: string;
