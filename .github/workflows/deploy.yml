@@ -56,10 +56,8 @@ jobs:
           touch apps/web/dist/.nojekyll
 
       - name: Configure Pages
+        # Requires Pages to be enabled once: repo Settings > Pages > Source = "GitHub Actions".
         uses: actions/configure-pages@v5
-        with:
-          # Enable Pages automatically on first run (no manual Settings step needed).
-          enablement: true
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

@@ -1,6 +1,28 @@
 # React Workshop 2026
 
+[![Deploy to GitHub Pages](https://github.com/haidang9b/reactjs-intensive/actions/workflows/deploy.yml/badge.svg)](https://github.com/haidang9b/reactjs-intensive/actions/workflows/deploy.yml)
+[![Tests](https://img.shields.io/badge/tests-32%20passing-brightgreen)](https://github.com/haidang9b/reactjs-intensive/actions/workflows/deploy.yml)
+[![Build](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/haidang9b/reactjs-intensive/actions/workflows/deploy.yml)
+
 React 19 + Vite monorepo starter with pnpm, Turborepo, Storybook, TanStack Query, React Hook Form, Tailwind CSS, and shared packages.
+
+**Live demo:** <https://haidang9b.github.io/reactjs-intensive/>
+
+## Status
+
+Latest local run of `pnpm test` and `pnpm build`:
+
+| Check       | Result                                     |
+| ----------- | ------------------------------------------ |
+| Test result | **32 passed** / 32 total (11 test files)   |
+| &nbsp;      | `@react-workshop/web` — 28 passed (9 files) |
+| &nbsp;      | `@react-workshop/ui` — 2 passed (1 file)   |
+| &nbsp;      | `@react-workshop/http-client` — 2 passed (1 file) |
+| Build       | **passing** — 2/2 tasks (`turbo build`)    |
+| Build time  | ~1.3s cold (web app via Vite); ~0.02s cached (Turbo full-cache hit) |
+
+> Status badges above reflect the latest `Deploy to GitHub Pages` workflow run,
+> which runs `lint → typecheck → test → build` before publishing.
 
 ## Requirements
 
